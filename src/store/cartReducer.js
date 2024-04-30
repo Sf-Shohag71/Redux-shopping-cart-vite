@@ -5,8 +5,8 @@ const CART_ITEM_INCREASE_QUANTITY = "cart/increaseItemQuantity";
 const CART_ITEM_DECREASE_QUANTITY = "cart/decreaseItemQuantity";
 
 // Action Creators
-export function addCartItem(productId, quantity = 1) {
-  return { type: CART_ADD_ITEM, payload: { productId, quantity } };
+export function addCartItem(productData) {
+  return { type: CART_ADD_ITEM, payload: productData };
 }
 
 export function removeCartItem(productId) {
@@ -42,8 +42,9 @@ export default function cartReducer(state = [], action) {
           return cartItem;
         });
       }
-      return [...state, action.payload];
+      return [...state, { ...action.payload, quantity: 1 }];
     }
+
     case CART_REMOVE_ITEM:
       return state.filter(
         (cartItem) => cartItem.productId !== action.payload.productId
