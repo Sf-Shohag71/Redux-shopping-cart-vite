@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import "./index.css";
 import Cart from "./pages/Cart.jsx";
 import Home from "./pages/Home.jsx";
+import WishList from "./pages/WishList.jsx";
 import { store } from "./store";
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/wishList",
+        element: <WishList />
       },
     ],
   },
