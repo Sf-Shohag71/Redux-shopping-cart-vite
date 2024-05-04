@@ -3,7 +3,7 @@ import {
   decreaseCartItemQuantity,
   increaseCartItemQuantity,
   removeCartItem,
-} from "../store/cartReducer";
+} from "../store/cartSlice";
 
 export default function CartItem({
   productId,

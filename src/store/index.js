@@ -1,11 +1,11 @@
 import { combineReducers, createStore } from "redux";
-import cartReducer, { decreaseCartItemQuantity } from "./cartReducer";
+import cartSlice, { decreaseCartItemQuantity } from "./cartSlice";
 import productsReducer from "./productsReducer";
 import wishListReducer from "./wishListReducer";
 
 const reducer = combineReducers({
   products: productsReducer,
-  cartItems: cartReducer,
+  cartItems: cartSlice,
   wishList: wishListReducer,
 });
 
