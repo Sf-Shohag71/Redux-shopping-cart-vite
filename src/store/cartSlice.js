@@ -1,33 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Action Types
-export const CART_ADD_ITEM = "cart/addItem";
-const CART_REMOVE_ITEM = "cart/removeItem";
-const CART_ITEM_INCREASE_QUANTITY = "cart/increaseItemQuantity";
-const CART_ITEM_DECREASE_QUANTITY = "cart/decreaseItemQuantity";
 
-// Action Creators
-export function addCartItem(productData) {
-  return { type: CART_ADD_ITEM, payload: productData };
-}
 
-export function removeCartItem(productId) {
-  return { type: CART_REMOVE_ITEM, payload: { productId } };
-}
 
-export function decreaseCartItemQuantity(productId) {
-  return {
-    type: CART_ITEM_DECREASE_QUANTITY,
-    payload: { productId },
-  };
-}
-
-export function increaseCartItemQuantity(productId) {
-  return {
-    type: CART_ITEM_INCREASE_QUANTITY,
-    payload: { productId },
-  };
-}
 
 const findItemIndex = (state, action) =>
   state.findIndex(
@@ -38,7 +13,7 @@ const slice = createSlice({
   name: "cart",
   initialState: [],
   reducers: {
-    addItem(state, action) {
+    addCartItem(state, action) {
       const existingItemIndex = findItemIndex(state, action);
       if (existingItemIndex !== -1) {
         state[existingItemIndex].quantity += 1;
@@ -46,15 +21,15 @@ const slice = createSlice({
         state.push({ ...action.payload, quantity: 1 });
       }
     },
-    removeItem(state, action) {
+    removeCartItem(state, action) {
       const existingItemIndex = findItemIndex(state, action);
       state.splice(existingItemIndex, 1);
     },
-    increaseItemQuantity(state, action) {
+    increaseCartItemQuantity(state, action) {
       const existingItemIndex = findItemIndex(state, action);
       state[existingItemIndex].quantity += 1;
     },
-    decreaseItemQuantity(state, action) {
+    decreaseCartItemQuantity(state, action) {
       const existingItemIndex = findItemIndex(state, action);
       state[existingItemIndex].quantity -= 1;
       if (state[existingItemIndex].quantity === 0) {
@@ -64,6 +39,6 @@ const slice = createSlice({
   },
 });
 
-console.log(slice);
+export const { addCartItem, removeCartItem, increaseCartItemQuantity, decreaseCartItemQuantity } = slice.actions;
 
 export default slice.reducer;
