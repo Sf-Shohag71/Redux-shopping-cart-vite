@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-
-
-
 const findItemIndex = (state, action) =>
   state.findIndex(
     (cartItem) => cartItem.productId === action.payload.productId
@@ -13,6 +9,9 @@ const slice = createSlice({
   name: "cart",
   initialState: [],
   reducers: {
+    loadCartItems(state, action) {
+      return action.payload.products;
+    },
     addCartItem(state, action) {
       const existingItemIndex = findItemIndex(state, action);
       if (existingItemIndex !== -1) {
@@ -39,6 +38,12 @@ const slice = createSlice({
   },
 });
 
-export const { addCartItem, removeCartItem, increaseCartItemQuantity, decreaseCartItemQuantity } = slice.actions;
+export const {
+  loadCartItems,
+  addCartItem,
+  removeCartItem,
+  increaseCartItemQuantity,
+  decreaseCartItemQuantity,
+} = slice.actions;
 
 export default slice.reducer;

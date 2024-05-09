@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartIcon from "../assets/cart-icon.svg";
 import wishList from "../assets/wishList.svg";
+import { loadCartItems } from "../store/cartSlice";
 import {
   fetchProducts,
-  fetchProductsError,
-  updateAllProducts,
+  updateAllProducts
 } from "../store/productsSlice";
 
 function Header() {
@@ -21,7 +21,12 @@ function Header() {
         dispatch(updateAllProducts(data));
       })
       .catch(() => {
-        dispatch(fetchProductsError("Something went wrong"));
+        // dispatch(fetchProductsError("Something went wrong"));
+      });
+    fetch("https://fakestoreapi.com/carts/5")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(loadCartItems(data));
       });
   }, []);
   return (
