@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartSlice, { decreaseCartItemQuantity } from "./cartSlice";
-import productsReducer from "./productsReducer";
+import productsReducer from "./productsSlice";
 import wishListReducer from "./wishListReducer";
 
 export const store = configureStore({

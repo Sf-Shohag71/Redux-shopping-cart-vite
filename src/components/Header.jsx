@@ -1,11 +1,29 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartIcon from "../assets/cart-icon.svg";
 import wishList from "../assets/wishList.svg";
+import {
+  fetchProducts,
+  fetchProductsError,
+  updateAllProducts,
+} from "../store/productsSlice";
 
 function Header() {
   const cartItems = useSelector((state) => state.cartItems);
   const wishListItems = useSelector((state) => state.wishList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(updateAllProducts(data));
+      })
+      .catch(() => {
+        dispatch(fetchProductsError("Something went wrong"));
+      });
+  }, []);
   return (
     <header>
       <div className="header-contents">
